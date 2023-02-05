@@ -81,20 +81,56 @@ function validateNumber(number) {
     return valid;
 }
 
+const valid = (input, value) => {
+    input.className = "";
+    inputName = input.name
+    inputId = input.name + "-input-message"
+    const nameMessage = document.getElementById(inputId);
+    if (nameMessage) {
+        nameMessage.parentElement.removeChild(nameMessage);
+    }
+    return value
+}
+
+
+const error = (input, errorMessage) => {
+    input.className = "invalid";
+    inputName = input.name
+    inputId = input.name + "-input-message"
+    if (!document.getElementById(inputId)) {
+        const small = document.createElement("small");
+        small.id = inputId;
+        small.className = "invalid";
+        small.innerText = errorMessage;
+        input.parentElement.appendChild(small);
+    }
+    return false;
+}
+
 function validateRadio(radio) {
     // todo
-
-    return true;
+    // Pierwotnie input mial być zawarty w funkcji 'error', ale w żaden sposób nie udało mi się zmusić w ten sposób funkcji do działania.
+    // Funkcja cały czas zwracała null, kiedy jest wewnątrz funkcji walidujących działa prawidłowo
+    /*
+    const error = (inputName, errorMessage) => {
+        const input = document.querySelectorAll("input[name=inputName]");
+        input.className = "invalid"
+        (...)
+    }
+    */
+    // Wtedy funkcje walidujące przyjmowałyby np. "error('favouriteNumber', '"'Wybierz liczbę.') i unikałbym powtórzeń w skrypcie
+    const input = document.querySelector("input[name='favouriteNumber']");
+    return (radio ? valid(input, radio) : error(input, 'Wybierz liczbę.'))
 }
 
 function validatePassword(password) {
     // todo
-
-    return true;
+    const input = document.querySelector("input[name='password']");
+    return (password.length >= 8 ? valid(input, password) : error(input, 'Hasło musi zawierać przynajmniej 8 znaków.'))
 }
 
 function validateRepeatedPassword(password, repeatedPassword) {
     // todo
-
-    return true;
+    const input = document.querySelector("input[name='password2']");
+    return (password === repeatedPassword ? valid(input, true) : error(input, 'Hasło nie zgadza się z poprzednim.'))
 }
