@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Praca domowa Javascript - czeski tłumacz</title>
+    <title>Praca domowa Javascript</title>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="script.js"></script>
 </head>
 <body style="text-align: center">
-    <input id="inputText" type="text">
-    <button onclick='translateText()'>Tłumacz!</button>
-    <div id="content" style="font-size:48px"></div>
-    <br>
-    <img src="krtek.png">
+<h1>What happened that year?</h1>
+<label for="number">Year: </label><input id='number' type="number" name="number">
+<button onclick="checkYear()">Check</button>
+<h2 id="result"></h2>
+<script src="script.js"></script>
 </body>
 </html>
